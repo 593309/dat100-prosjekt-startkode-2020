@@ -38,6 +38,7 @@ return secs;
 		int  A = toSeconds(timeStr);
         GPS1[0] = new GPSPoint(A,y,x,m);
         return GPS1[0];
+
 	}
 	public static String latitudeStr(String a) {
 
