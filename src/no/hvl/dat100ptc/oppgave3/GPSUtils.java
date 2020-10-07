@@ -109,9 +109,9 @@ public class GPSUtils {
 
 	public static String formatDouble(double d) {
 
-		String str = Double.toString((double)((int)(d*100))/100);
+		String str = Double.toString((double)((int)((d+0.005)*100))/100);
 
-		return str;
+		return " ".repeat(TEXTWIDTH - str.length()) + str;
 		
 	}
 	
