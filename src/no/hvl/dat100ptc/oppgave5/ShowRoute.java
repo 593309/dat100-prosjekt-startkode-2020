@@ -11,8 +11,8 @@ import no.hvl.dat100ptc.oppgave4.GPSComputer;
 public class ShowRoute extends EasyGraphics {
 
 	private static int MARGIN = 50;
-	private static int MAPXSIZE = 800;
-	private static int MAPYSIZE = 800;
+	private static int MAPXSIZE = 700;
+	private static int MAPYSIZE = 500;
 
 	private GPSPoint[] gpspoints;
 	private GPSComputer gpscomputer;
@@ -52,38 +52,64 @@ public class ShowRoute extends EasyGraphics {
 
 	// antall y-pixels per breddegrad
 	public double ystep() {
-	
-		double ystep;
+		double maxlat=GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minlat=GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
 		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
-		
+		double ystep = MAPYSIZE /(Math.abs(maxlat-minlat));
+		return ystep;
 	}
 
 	public void showRouteMap(int ybase) {
 
-		// TODO - START
+	int x = MARGIN,y = 0;
+	
+	double xstep = xstep();
+	double ystep = ystep();
+	double minx = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
+	double miny = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+	
+	int prevx=-1, prevy=-1;	
 		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - SLUTT
+		for (int i = 0; i < gpspoints.length; i++) {
+			final GPSPoint p = gpspoints[i];
+			double px = p.getLongitude();
+			double py = p.getLatitude();
+			x = (int)((px-minx)*xstep) + MARGIN;
+			y = (int)(ybase - (py-miny)*ystep);
+			if (prevx == -1) {
+				prevx = x;
+				prevy = y;
+			}
+			drawLine(prevx,prevy, x, y);
+			setColor(64, 128, 64);
+			fillCircle(x, y, 3);
+			prevx = x;
+			prevy = y;
+		}
 	}
 
 	public void showStatistics() {
 
+		double[] speed =  gpscomputer.speeds();
+		double topfart= GPSUtils.findMax(speed);
+		double avg = 0; 
+		for(double s: speed)
+			avg+=s;
+		avg/=speed.length;
+		double l= gpscomputer.totalKcal(70);
+		
 		int TEXTDISTANCE = 20;
 
 		setColor(0,0,0);
 		setFont("Courier",12);
+		drawString("Total Time     :" + gpscomputer.totalTime(), MARGIN, MARGIN/2);
+		drawString("Total distance :" + gpscomputer.totalDistance(), MARGIN, MARGIN/2+TEXTDISTANCE);
+		drawString("Total elevation:" + gpscomputer.totalElevation(), MARGIN, MARGIN/2+2*TEXTDISTANCE);
+		drawString("Max speed      :" + topfart, MARGIN, MARGIN/2+3*TEXTDISTANCE);
+		drawString("Average speed  :" + avg, MARGIN, MARGIN/2+4*TEXTDISTANCE);
+		drawString("Energy         :" + l, MARGIN, MARGIN/2+5*TEXTDISTANCE);
 		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - SLUTT;
+	
 	}
 
 }
