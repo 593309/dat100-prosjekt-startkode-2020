@@ -50,7 +50,8 @@ public class ShowProfile extends EasyGraphics {
 		
 		for (int i = 0 ; i < gpspoints.length; i++) {
 			double d = gpspoints[i].getElevation();
-			drawLine(x+1, ybase, x+1, ybase + (int)d);
+			drawLine(x+1, ybase, x+1, ybase - (int)d);
+			x+= 3;
 		}
 	}
 
