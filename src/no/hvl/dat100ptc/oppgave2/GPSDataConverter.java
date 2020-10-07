@@ -24,18 +24,19 @@ public class GPSDataConverter {
          min = Integer.parseInt(minu);
          sec = Integer.parseInt(sek);
         secs = (hr*60*60)+(min*60)+sec;
-        
-//        System.out.print(hr +" "+min+" "+sec+"\n");
-//        System.out.print(secs);
+ 
 return secs;
 		
 	}
 
 	public static GPSPoint convert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
 
-		GPSPoint gpspoint;
 		GPSPoint[] GPS1 = new GPSPoint[1];
-        GPS1[0] = new GPSPoint(toSeconds(timeStr),latitudeStr(latitudeStr),longitudeStr(longitudeStr), elevationStr(elevationStr));
+		double x = Double.parseDouble(longitudeStr);
+		double y = Double.parseDouble(latitudeStr);
+		double m = Double.parseDouble(elevationStr);
+		int  A = toSeconds(timeStr);
+        GPS1[0] = new GPSPoint(A,y,x,m);
         return GPS1[0];
 	}
 	public static String latitudeStr(String a) {
