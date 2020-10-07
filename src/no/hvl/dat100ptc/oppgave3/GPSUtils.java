@@ -101,7 +101,7 @@ public class GPSUtils {
 		secs /= 60;
 		int h = secs % 24;
 		
-		timestr = h + TIMESEP + m + TIMESEP + s;
+		timestr = (h < 10 ? "0" : "") + h + TIMESEP +(m < 10 ? "0" : "")+ m + TIMESEP +(s < 10 ? "0" : "")+ s;
 		
 		return " ".repeat(TEXTWIDTH - timestr.length()) + timestr;
 	}

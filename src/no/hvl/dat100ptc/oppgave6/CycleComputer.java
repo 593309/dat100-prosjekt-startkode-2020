@@ -66,9 +66,7 @@ public class CycleComputer extends EasyGraphics {
 
 	
 	public void bikeRoute() {
-
-		throw new UnsupportedOperationException(TODO.method());
-
+		
 	}
 
 	public double xstep() {
