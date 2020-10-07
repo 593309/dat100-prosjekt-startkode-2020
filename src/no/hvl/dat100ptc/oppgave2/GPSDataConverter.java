@@ -35,7 +35,10 @@ return secs;
 
 		GPSPoint gpspoint;
 		GPSPoint[] GPS1 = new GPSPoint[1];
-        GPS1[0] = new GPSPoint(toSeconds(timeStr),latitudeStr(latitudeStr),longitudeStr(longitudeStr), elevationStr(elevationStr));
+        GPS1[0] = new GPSPoint(toSeconds(timeStr),
+        		Double.parseDouble(latitudeStr(latitudeStr)),
+        		Double.parseDouble(longitudeStr(longitudeStr)),
+        		Double.parseDouble(elevationStr(elevationStr)));
         return GPS1[0];
 	}
 	public static String latitudeStr(String a) {
