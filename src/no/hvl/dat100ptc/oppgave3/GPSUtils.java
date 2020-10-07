@@ -63,7 +63,7 @@ public class GPSUtils {
 				
 				latitude2 = toRadians(gpspoint2.getLatitude()), 
 				
-				longitude2 = toRadians(gpspoint1.getLongitude());
+				longitude2 = toRadians(gpspoint2.getLongitude());
 
 		double deltaLat = latitude2 - latitude1;
 		double deltalon = longitude2 - longitude1;
