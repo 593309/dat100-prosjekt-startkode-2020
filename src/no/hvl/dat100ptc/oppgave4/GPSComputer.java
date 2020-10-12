@@ -105,7 +105,8 @@ public class GPSComputer {
 		double speed = dist/secs ;
 		
 		double speedkm = speed * 3.6;
-	
+		
+	return speedkm;
 	}
         	
         }
