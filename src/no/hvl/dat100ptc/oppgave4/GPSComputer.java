@@ -1,5 +1,8 @@
 package no.hvl.dat100ptc.oppgave4;
 
+import static java.lang.Math.atan2;
+import static java.lang.Math.sqrt;
+
 import no.hvl.dat100ptc.TODO;
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
 import no.hvl.dat100ptc.oppgave2.GPSData;
@@ -30,11 +33,31 @@ public class GPSComputer {
 	public double totalDistance() {
 
 		double distance = 0;
+		
+		double latitude1 = Math.toRadians(gpspoints[0].getLatitude());
+	 	double latitude2 = Math.toRadians(gpspoints[gpspoints.length].getLatitude());
+		double longitude1 = Math.toRadians(gpspoints[0].getLongitude());
+		double longitude2 = Math.toRadians(gpspoints[gpspoints.length].getLongitude());
 
 		// TODO - START
+		double dlatitude = latitude2 - latitude1;
+		double dlongitude = longitude2 - longitude1;
+   
+     
+     double a = Math.pow(Math.sin(dlatitude/2), 2)
+    		   + Math.cos(latitude1) * Math.cos(latitude2)
+    		   * Math.pow(Math.sin(dlongitude/2), 2);
+		
+     double c = 2 * Math.atan2(sqrt(a), sqrt(1 - a));
+     
+     double r = 6371000;
+     
+     distance = c * r;
+    
+     
+     return(distance);
 
-		throw new UnsupportedOperationException(TODO.method());
-
+    
 		// TODO - SLUTT
 
 	}
@@ -45,8 +68,13 @@ public class GPSComputer {
 		double elevation = 0;
 
 		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
+       for(int i = 1; i <= gpspoints[gpspoints.length].getElevation(); i++ ) {
+    	   
+    	   elevation = gpspoints[i].getElevation();
+       }
+       
+       return elevation;
+		
 
 		// TODO - SLUTT
 
@@ -55,7 +83,9 @@ public class GPSComputer {
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {
 
-		throw new UnsupportedOperationException(TODO.method());
+		int secs = gpspoints[gpspoints.length].getTime() - gpspoints[0].getTime();
+		
+		return secs;
 
 	}
 		
@@ -65,20 +95,42 @@ public class GPSComputer {
 		
 		// TODO - START		// OPPGAVE - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		
+		
+	for(int i = 0; i <= gpspoints.length; i++) {
+		
+		int secs = gpspoints[i].getTime() - gpspoints[i-1].getTime();
+		double dist = distance(gpspoints[i-1], gpspoints[i]);
+		
+		double speed = dist/secs ;
+		
+		double speedkm = speed * 3.6;
+		
+	}
+        	
+        
+        	
+        }
+
 
 		// TODO - SLUTT
 
-	}
+	
 	
 	public double maxSpeed() {
 		
 		double maxspeed = 0;
 		
+		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i = 1; i< speeds().length; i++) {
+			if (speeds()[i]> maxspeed)
+				maxspeed = speeds()[i];
+		}
 		
+		
+		return maxspeed;
 		// TODO - SLUTT
 		
 	}
@@ -89,7 +141,15 @@ public class GPSComputer {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+         int secs = totalTime();
+         
+        double dist = totalDistance();
+		
+		double speed = dist/secs; //m/s
+		
+		speed *= 3.6; //km/t
+		
+		return speed;
 		
 		// TODO - SLUTT
 		
@@ -117,8 +177,11 @@ public class GPSComputer {
 		double speedmph = speed * MS;
 
 		// TODO - START
+        
+		kcal = met * weight * (secs/3600);
 		
-		throw new UnsupportedOperationException(TODO.method());
+		System.out.println(kcal);
+		return kcal;
 
 		// TODO - SLUTT
 		
@@ -127,11 +190,14 @@ public class GPSComputer {
 	public double totalKcal(double weight) {
 
 		double totalkcal = 0;
-
+        double met = 0;
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
-
+		totalkcal = met * weight * totalTime(); 
+		
+		return totalkcal;
+				
+				
 		// TODO - SLUTT
 		
 	}
@@ -144,10 +210,18 @@ public class GPSComputer {
 
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
+		
+		System.out.println("Total time : " + totalTime());
+		System.out.println("Total distance : " + totalDistance());
+		System.out.println("Total elevation : " + totalElevation());
+		System.out.println("Max speed : " + maxSpeed());
+		System.out.println("Average Speed : " + averageSpeed());
+		System.out.println("Energy : " + totalKcal(WEIGHT));
+		
+		
 		
 		// TODO - SLUTT
-		
+		System.out.println("==============================================");
 	}
 
 }
