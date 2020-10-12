@@ -100,15 +100,13 @@ public class GPSComputer {
 	for(int i = 0; i <= gpspoints.length; i++) {
 		
 		int secs = gpspoints[i].getTime() - gpspoints[i-1].getTime();
-		double dist = distance(gpspoints[i-1], gpspoints[i]);
+		double dist = GPSUtils.distance(gpspoints[i-1], gpspoints[i]);
 		
 		double speed = dist/secs ;
 		
 		double speedkm = speed * 3.6;
-		
+	
 	}
-        	
-        
         	
         }
 
@@ -178,7 +176,9 @@ public class GPSComputer {
 
 		// TODO - START
         
-		kcal = met * weight * (secs/3600);
+		double h = secs/3600;
+		
+		kcal = met * weight * h;
 		
 		System.out.println(kcal);
 		return kcal;
