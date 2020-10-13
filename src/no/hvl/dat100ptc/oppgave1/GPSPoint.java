@@ -14,13 +14,10 @@ public class GPSPoint {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.elevation = elevation;
-
 	}
 
 	public int getTime() {
-
 		return time;
-
 	}
 
 	public void setTime(int time) {
@@ -57,7 +54,6 @@ public class GPSPoint {
 	public void setElevation(double elevation) {
 
 		this.elevation = elevation;
-
 	}
 
 	public String toString() {

@@ -45,7 +45,7 @@ public class ShowProfile extends EasyGraphics {
 
 		// ybase indicates the position on the y-axis where the columns should start
 	
-		int x = MARGIN,y;
+		int x = MARGIN;
 
 		
 		for (int i = 0 ; i < gpspoints.length; i++) {

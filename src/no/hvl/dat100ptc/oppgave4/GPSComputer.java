@@ -32,53 +32,30 @@ public class GPSComputer {
 	// beregn total distances (i meter)
 	public double totalDistance() {
 
-		double distance = 0;
-		
-		double latitude1 = Math.toRadians(gpspoints[0].getLatitude());
-	 	double latitude2 = Math.toRadians(gpspoints[gpspoints.length].getLatitude());
-		double longitude1 = Math.toRadians(gpspoints[0].getLongitude());
-		double longitude2 = Math.toRadians(gpspoints[gpspoints.length].getLongitude());
+        double total = 0;
+        for (int i = 0; i < gpspoints.length-1;i++) {
+        double x = GPSUtils.distance(gpspoints[i],gpspoints[i+1] );
+        total = total+x;
 
-		// TODO - START
-		double dlatitude = latitude2 - latitude1;
-		double dlongitude = longitude2 - longitude1;
-   
-     
-     double a = Math.pow(Math.sin(dlatitude/2), 2)
-    		   + Math.cos(latitude1) * Math.cos(latitude2)
-    		   * Math.pow(Math.sin(dlongitude/2), 2);
-		
-     double c = 2 * Math.atan2(sqrt(a), sqrt(1 - a));
-     
-     double r = 6371000;
-     
-     distance = c * r;
-    
-     
-     return(distance);
+        }
 
-    
-		// TODO - SLUTT
+        return total;
 
-	}
+    }
 
 	// beregn totale høydemeter (i meter)
-	public double totalElevation() {
+	public double totalDistance() {
 
-		double elevation = 0;
+        double total = 0;
+        for (int i = 0; i < gpspoints.length-1;i++) {
+        double x = GPSUtils.distance(gpspoints[i],gpspoints[i+1] );
+        total = total+x;
 
-		// TODO - START
-       for(int i = 1; i <= gpspoints[gpspoints.length].getElevation(); i++ ) {
-    	   
-    	   elevation = gpspoints[i].getElevation();
-       }
-       
-       return elevation;
-		
+        }
 
-		// TODO - SLUTT
+        return total;
 
-	}
+    }
 
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {

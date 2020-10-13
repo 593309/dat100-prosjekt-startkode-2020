@@ -98,16 +98,17 @@ public class ShowRoute extends EasyGraphics {
 		avg/=speed.length;
 		double l= gpscomputer.totalKcal(70);
 		
+		
 		int TEXTDISTANCE = 20;
 
 		setColor(0,0,0);
 		setFont("Courier",12);
-		drawString("Total Time     :" + gpscomputer.totalTime(), MARGIN, MARGIN/2);
-		drawString("Total distance :" + gpscomputer.totalDistance(), MARGIN, MARGIN/2+TEXTDISTANCE);
-		drawString("Total elevation:" + gpscomputer.totalElevation(), MARGIN, MARGIN/2+2*TEXTDISTANCE);
-		drawString("Max speed      :" + topfart, MARGIN, MARGIN/2+3*TEXTDISTANCE);
-		drawString("Average speed  :" + avg, MARGIN, MARGIN/2+4*TEXTDISTANCE);
-		drawString("Energy         :" + l, MARGIN, MARGIN/2+5*TEXTDISTANCE);
+		drawString("Total Time     :" + GPSUtils.formatTime(gpscomputer.totalTime()), MARGIN, MARGIN/2);
+		drawString("Total distance :" + GPSUtils.formatDouble(gpscomputer.totalDistance()) + " km", MARGIN, MARGIN/2+TEXTDISTANCE);
+		drawString("Total elevation:" + GPSUtils.formatDouble(gpscomputer.totalElevation()) + " m", MARGIN, MARGIN/2+2*TEXTDISTANCE);
+		drawString("Max speed      :" + GPSUtils.formatDouble(topfart)+ " km/t", MARGIN, MARGIN/2+3*TEXTDISTANCE);
+		drawString("Average speed  :" + GPSUtils.formatDouble(avg)+ " km/t", MARGIN, MARGIN/2+4*TEXTDISTANCE);
+		drawString("Energy         :" + GPSUtils.formatDouble(l) + " kcal", MARGIN, MARGIN/2+5*TEXTDISTANCE);
 		
 	
 	}
