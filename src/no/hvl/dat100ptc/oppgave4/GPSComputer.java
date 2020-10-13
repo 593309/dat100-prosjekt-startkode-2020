@@ -95,7 +95,7 @@ public class GPSComputer {
 		
 		// TODO - START		// OPPGAVE - START
 		
-		
+		double [] speeds = {};
 		
 	for(int i = 0; i <= gpspoints.length; i++) {
 		
@@ -105,11 +105,15 @@ public class GPSComputer {
 		double speed = dist/secs ;
 		
 		double speedkm = speed * 3.6;
+		double[] speeds1 = {speedkm};
+		speeds1 = speeds;
 		
-	return speedkm;
-	}
-        	
-        }
+		
+		
+	}   return  speeds;
+	       
+	 }
+        
 
 
 		// TODO - SLUTT
@@ -174,10 +178,36 @@ public class GPSComputer {
 		// MET: Metabolic equivalent of task angir (kcal x kg-1 x h-1)
 		double met = 0;		
 		double speedmph = speed * MS;
+		
+		// Definere met ut ifra farten:
+		
+		if (speedmph<10) {
+        	met = 4.0;
+        }
+        else if (speedmph>=10 && speedmph<12) {
+        	met = 6.0;
+        }
+        
+        else if (speedmph>=12 && speedmph<14) {
+        	met = 8.0;
+        }
+        
+        else if (speedmph>=14 && speedmph<16) {
+        	met = 10.0;
+        }
+        
+        else if (speedmph>=16 && speedmph<20) {
+        	met = 12.0;
+        }
+        
+        else if (speedmph>=20) {
+        	met = 16.0;
+        }
+        
+		double h = secs/3600;
 
 		// TODO - START
         
-		double h = secs/3600;
 		
 		kcal = met * weight * h;
 		
