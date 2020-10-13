@@ -41,30 +41,41 @@ public class GPSComputer {
 
         return total;
 
+  
+
     }
+	public double totalElevation() {
 
-	// beregn totale høydemeter (i meter)
-	public double totalDistance() {
+        double elevation = 0;
 
-        double total = 0;
-        for (int i = 0; i < gpspoints.length-1;i++) {
-        double x = GPSUtils.distance(gpspoints[i],gpspoints[i+1] );
-        total = total+x;
 
-        }
 
-        return total;
+       for(int i = 0; i < gpspoints.length-1;) {
+           double elev1 = gpspoints[i].getElevation();
+           double elev2 = gpspoints[i+1].getElevation();
+           if (Math.max(elev2, elev1) == elev2) {
+               elevation = elevation + elev2-elev1;
+               i++;
+           } else {
+              i++;
+           }
+       }
+
+       return elevation;
+
+
+
 
     }
 
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {
 
-		int secs = gpspoints[gpspoints.length].getTime() - gpspoints[0].getTime();
-		
-		return secs;
+        int secs = gpspoints[gpspoints.length-1].getTime() - gpspoints[0].getTime();
 
-	}
+        return secs;
+
+    }
 		
 	// beregn gjennomsnitshastighets mellom hver av gps punktene
 
